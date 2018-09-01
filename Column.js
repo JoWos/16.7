@@ -35,7 +35,24 @@ function Column(id, name) {
             })
 			
 		});
-			
+        
+        columnTitle.click(function(event) {
+            var changeName = prompt("Wpisz nową nazwę kolumny");
+            event.preventDefault();
+            $.ajax({
+                url: baseUrl + '/card/' + self.id,
+                method: 'PUT',
+                data: {
+                    name: changeName,
+                    bootcamp_kanban_column_id: self.id
+                },
+                success: function(response) {
+                    var card = new Card(response.id, changeName);
+                    self.changeTitle(card);
+                  //  columnTitle = $('<h2 class="column-title">' + self.changeName + '</h2>');
+                }
+            })
+        })
 			// KONSTRUOWANIE ELEMENTU KOLUMNY
 		column.append(columnTitle)
 			.append(columnDelete)
@@ -43,7 +60,8 @@ function Column(id, name) {
 			.append(columnCardList);
 			return column;
 		}
-	}
+    }
+    
 Column.prototype = {
 	createCard: function(card) {
 	  this.element.children('ul').append(card.element);
@@ -58,5 +76,10 @@ Column.prototype = {
             }
         })
 	  
-	}
+    },
+
+    changeTitle: function() {
+        this.element.remove();
+    }
+    
 };

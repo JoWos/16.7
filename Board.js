@@ -6,15 +6,6 @@ var board = {
 	},
 	element: $('#board .column-container')
 };
-
-// USUNĄĆ? 
-/*
-$('.create-column')
-	.click(function() {
-        var columnName = prompt('Wpisz nazwę kolumny');
-        board.createColumn(new Column(columnName));
-        
-    });*/
     
 $('.create-column')
     .click(function() {

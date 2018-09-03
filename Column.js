@@ -2,7 +2,7 @@ function Column(id, name) {
 	var self = this;
 	
 	this.id = id;
-	this.name = name || 'No name given';
+	this.name = name || 'Brak nazwy';
 	this.element = createColumn();
 
 	function createColumn() {
@@ -29,27 +29,24 @@ function Column(id, name) {
                     bootcamp_kanban_column_id: self.id
                 },
                 success: function(response) {
-                    var card = new Card(response.id, cardName);
+                    var card = this.card
                     self.createCard(card);
                 }
-            })
-			
+            })	
 		});
         
-        columnTitle.click(function(event) {
-            var changeName = prompt("Wpisz nową nazwę kolumny");
-            event.preventDefault();
+        columnTitle.click(function() {
+            var newColumnName = prompt("Zmień nazwę kolumny: " + self.name);
             $.ajax({
-                url: baseUrl + '/card/' + self.id,
+                url: baseUrl + '/column/' + self.id,
                 method: 'PUT',
                 data: {
-                    name: changeName,
+                    name: newColumnName,
                     bootcamp_kanban_column_id: self.id
                 },
                 success: function(response) {
-                    var card = new Card(response.id, changeName);
-                    self.changeTitle(card);
-                  //  columnTitle = $('<h2 class="column-title">' + self.changeName + '</h2>');
+                    self.name = newColumnName;
+                    columnTitle.text(newColumnName);  
                 }
             })
         })
@@ -65,7 +62,8 @@ function Column(id, name) {
 Column.prototype = {
 	createCard: function(card) {
 	  this.element.children('ul').append(card.element);
-	},
+    },
+    
 	deleteColumn: function() {
         var self = this;
         $.ajax({
@@ -75,11 +73,9 @@ Column.prototype = {
                 self.element.remove();  
             }
         })
-	  
     },
 
     changeTitle: function() {
         this.element.remove();
     }
-    
 };

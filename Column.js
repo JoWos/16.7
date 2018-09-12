@@ -11,7 +11,7 @@ function Column(id, name) {
 		var columnTitle = $('<h2 class="column-title">' + self.name + '</h2>');
 		var columnCardList = $('<ul class="card-list"></ul>');
 		var columnDelete = $('<button class="btn-delete">x</button>');
-		var columnAddCard = $('<button class="column-add-card">Dodaj kartę</button>');
+		var columnAddCard = $('<button class="column-add-card">+</button>');
 		
 		// PODPINANIE ODPOWIEDNICH ZDARZEŃ POD WĘZŁY
 		columnDelete.click(function() {
@@ -29,7 +29,7 @@ function Column(id, name) {
                     bootcamp_kanban_column_id: self.id
                 },
                 success: function(response) {
-                    var card = this.card
+                    var card = new Card(response.id, cardName);
                     self.createCard(card);
                 }
             })	

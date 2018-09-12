@@ -3,13 +3,33 @@ body {
     background: url("https://images.pexels.com/photos/1367188/pexels-photo-1367188.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260");
     background-size: cover;
     background-position: top;
+    background-attachment: fixed;
+    font-family: 'Archivo Narrow', sans-serif;
 }
 
 * {box-sizing: border-box;}
 
+.button-container {
+  margin: 0 auto;
+  width: 400px;
+  text-align: center;
+}
+
+button {
+  text-align: center;
+  outline: none;
+  border: none;
+  transition: background-color 0.2s ease-in-out;
+}
+
+button:hover {
+  background-color: #cd5555;
+}
+
 .ui-sortable {
   min-height: 80px;
 }
+
 .btn-delete {
   position: absolute;
   right: 0;
@@ -20,14 +40,33 @@ body {
   background-color: rgba(0,0,0,0.4);
   color: white;
 }
-/* BOARD */
-.board h1 {
-  margin-left: 8px;
+
+.create-column {
+  width: 45px;
+  height: 45px;
+  text-align: center;
+  font-size: 22px;
+  background-color: #cd5555;
+  color: white;
 }
+
+.create-column:hover {
+  background-color: #596e79;
+}
+
+/* BOARD */
+
+.board h1 {
+  text-align: center;
+  letter-spacing: 2px;
+}
+
 .column-container {
   display: flex;
   flex-direction: row;
-  flex-wrap: nowrap;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  padding: 5px;
 }
 
 
@@ -36,16 +75,34 @@ body {
   order: 1;
   min-width: 300px;
   min-height: 50vh;
-  background-color: lightgrey;
-  margin-left: 8px;
+  background-color: rgba(240, 247, 247, 0.1);
+  margin: 8px;
   list-style: none;
   position: relative;
 }
+
+.column-title {
+  padding: 12px;
+  background-color: #596e79;
+  font-size: 30px;
+  text-align: center;
+  color: #f7f6e7;
+  border-bottom: 5px solid #cd5555;
+  margin: 0;
+}    
+
 .column-add-card {
+  position: absolute;
+  top: 0;
+  left: 0;
   cursor: pointer;
-  text-decoration: underline;
-  margin: 5px 8px;
+  padding: 4px;
   display: block;
+  background-color: rgba(0,0,0,0.4);
+  color: #f7f6e7;
+  width: 22px;
+  height: 22px;
+  border: 0;
 }
 
 /* STYLE KARTY */
@@ -53,10 +110,12 @@ body {
   box-sizing: border-box;
   display: block;
   height: 60px;
-  margin-bottom: 5px;
-  padding: 4px;
+  margin-bottom: 15px;
+  padding: 20px;
   overflow: hidden;
   position: relative;
+  background:rgba(115, 143, 151, 0.7);
+  border-bottom: 3px solid #5c5757;
 }
 .card-list {
   list-style: none;
@@ -72,5 +131,5 @@ body {
   height: 60px;
   margin-bottom: 5px;
   border: 2px solid lightgrey;
-  background-color: lightblue;
+  background-color: #dbf1f2;
 }
